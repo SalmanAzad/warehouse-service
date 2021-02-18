@@ -9,13 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-@Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Article implements Serializable {
 
+    private static final long serialVersionUID = 4904869209491293165L;
     @Id
     private Long id;
 

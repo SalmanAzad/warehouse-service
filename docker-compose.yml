@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_DB: warehouse_postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: pass
     ports:
       - 5432:5432
     networks:
@@ -17,7 +17,7 @@ services:
   warehouse-service:
     depends_on:
       - warehouse-db-postgres
-    container_name: warehouse-service
+    container_name: warehouse_service
     image: warehouse-service:0.0.1
     build:
       network: host
@@ -35,4 +35,4 @@ services:
     environment:
       - spring.datasource.url=jdbc:postgresql://warehouse-db-postgres:5432/warehouse_postgres
       - spring.datasource.username=postgres
-      - spring.datasource.password=password
+      - spring.datasource.password=pass
