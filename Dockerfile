@@ -15,7 +15,7 @@ RUN mvn -f /home/app/pom.xml clean package
 ##########################################################################################
 ## Step 2 : Build application image
 ##########################################################################################
-FROM adoptopenjdk/openjdk15:alpine-jre
+FROM adoptopenjdk/openjdk11:alpine-jre
 
 RUN mkdir -p /app/data/input
 RUN mkdir -p /app/data/output
