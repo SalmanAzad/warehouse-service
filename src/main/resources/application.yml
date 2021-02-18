@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: warehouse-service
+
+  ## PostgreSQL
+  datasource:
+        url: jdbc:postgresql://warehouse-db-postgres:5432/postgres
+        username: postgres
+        password: password
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: org.postgresql.Driver
+        hikari:
+          connection-timeout: 20000
+          maximumPoolSize: 5
+
+   ## default connection pool
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
