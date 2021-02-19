@@ -9,9 +9,10 @@ import java.util.List;
 
 @Service
 public class ArticleService {
-    @Autowired
+
     private final ArticleRepository articleRepository;
 
+    @Autowired
     public ArticleService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
