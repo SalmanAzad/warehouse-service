@@ -7,7 +7,7 @@ services:
     image: postgres:13.1
     restart: always
     environment:
-      POSTGRES_DB: warehouse_postgres
+      POSTGRES_DB: warehouse
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:

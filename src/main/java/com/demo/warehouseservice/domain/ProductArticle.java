@@ -1,9 +1,16 @@
 package com.demo.warehouseservice.domain;
-
-import lombok.EqualsAndHashCode;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import javax.persistence.*;
 
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProductArticle {
 
     @Id
@@ -16,6 +23,7 @@ public class ProductArticle {
     @ManyToOne
     private Article article;
 
+    @Column(nullable = false)
     private Long quantity;
 
 }
