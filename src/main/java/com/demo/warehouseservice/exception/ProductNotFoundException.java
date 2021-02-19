@@ -1,9 +1,9 @@
 package com.demo.warehouseservice.exception;
 
-public class ProductValidationException extends Exception {
+public class ProductNotFoundException extends Exception {
     private static final long serialVersionUID = 126636786420667279L;
 
-    public ProductValidationException(String message) {
+    public ProductNotFoundException(String message) {
         super(message);
     }
 }
