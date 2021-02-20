@@ -6,6 +6,8 @@ import com.demo.warehouseservice.domain.ProductArticle;
 import com.demo.warehouseservice.dto.ProductArticleDto;
 import com.demo.warehouseservice.dto.ProductDto;
 import com.demo.warehouseservice.exception.ArticleNotFoundException;
+import com.demo.warehouseservice.exception.ProductNotFoundException;
+import com.demo.warehouseservice.exception.ProductOutOfStockException;
 import com.demo.warehouseservice.repository.ArticleRepository;
 import com.demo.warehouseservice.repository.ProductArticleRepository;
 import com.demo.warehouseservice.repository.ProductRepository;
@@ -102,5 +104,31 @@ public class ProductService {
            log.error(articleNotFoundException.getMessage());
         }
         return products;
+    }
+
+    /**
+     * Update product and article inventory.
+     *
+     * @param id the product id
+     * @return the product
+     * @throws ProductOutOfStockException if conditions are not met.
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public Product updateProductAndArticleInventory(final Long id) throws ProductOutOfStockException, ProductNotFoundException {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(String.format("Product not found :: %s ", id)));
+
+        List<ProductArticle> productArticles = productArticleRepository.findAllByProduct(product);
+
+        for (ProductArticle productArticle : productArticles) {
+            Article article = productArticle.getArticle();
+            if (article.getStock() - productArticle.getQuantity() < 0) {
+                throw new ProductOutOfStockException(String.format("Some articles of product is out of stock. %s", article.getId()));
+            }
+            article.setStock(article.getStock() - productArticle.getQuantity());
+            articleRepository.save(article);
+        }
+
+        return product;
     }
 }
